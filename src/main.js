@@ -3,6 +3,7 @@ import { files, srcFiles, publicFiles } from './files.js';
 import * as monaco from 'monaco-editor';
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
+import { FileExplorer } from './fileExplorer.js';
 
 let webcontainerInstance;
 
@@ -73,7 +74,13 @@ async function initializeWebContainer() {
       theme: 'vs-dark',
       automaticLayout: true
     });
-
+    
+    // In the initializeWebContainer function, after initializing the editor:
+    const fileExplorer = new FileExplorer(
+      document.getElementById('file-explorer'),
+      webcontainerInstance,
+      editor
+    );
     // Initialize terminal
     const terminal = new Terminal({
       convertEol: true

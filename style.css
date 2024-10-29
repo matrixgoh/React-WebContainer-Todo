@@ -11,7 +11,7 @@ body {
 
 .container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 200px 1fr 1fr;
     grid-template-rows: 1fr 300px;
     height: 100vh;
     gap: 10px;
@@ -19,19 +19,19 @@ body {
 }
 
 .editor-container {
-    grid-column: 1;
-    grid-row: 1;
-    border: 1px solid #ccc;
-}
-
-.preview-container {
     grid-column: 2;
     grid-row: 1;
     border: 1px solid #ccc;
 }
 
+.preview-container {
+    grid-column: 3;
+    grid-row: 1;
+    border: 1px solid #ccc;
+}
+
 .terminal-container {
-    grid-column: 1 / span 2;
+    grid-column: 2 / span 2;
     grid-row: 2;
     border: 1px solid #ccc;
     background: #1e1e1e;
@@ -45,3 +45,125 @@ body {
 #preview {
     border: none;
 }
+
+
+.file-explorer {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    border: 1px solid #ccc;
+    background: #1e1e1e;
+    color: #fff;
+    overflow: auto;
+  }
+
+/* File Explorer Styles */
+.file-explorer {
+    padding: 10px;
+  }
+  
+  .file-explorer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 10px;
+  }
+  
+  .file-explorer-title {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .file-explorer-actions {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .file-explorer-button {
+    background: #333;
+    border: none;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+  
+  .file-explorer-button:hover {
+    background: #444;
+  }
+  
+  .file-tree {
+    font-family: monospace;
+    font-size: 13px;
+  }
+  
+  .file-tree-item {
+    padding: 3px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .file-tree-item:hover {
+    background: #333;
+  }
+  
+  .file-tree-item.selected {
+    background: #0066cc;
+  }
+  
+  .file-tree-indent {
+    margin-left: 20px;
+  }
+  
+  .folder-icon::before {
+    content: "📁";
+    margin-right: 5px;
+  }
+  
+  .file-icon::before {
+    content: "📄";
+    margin-right: 5px;
+  }
+
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    z-index: 1000;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+  }
+  
+  .modal input {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    background: #333;
+    border: 1px solid #444;
+    color: #fff;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+  }
