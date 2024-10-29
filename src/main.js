@@ -113,10 +113,17 @@ async function initializeWebContainer() {
     terminal.write('\r\nStarting development server...\r\n');
     await startDevServer(terminal);
 
-    // Handle file changes
+    // Handle file changes with debouncing
+    let saveTimeout;
     editor.onDidChangeModelContent(async () => {
-      const content = editor.getValue();
-      await webcontainerInstance.fs.writeFile('src/App.js', content);
+      if (saveTimeout) clearTimeout(saveTimeout);
+      
+      saveTimeout = setTimeout(async () => {
+        const content = editor.getValue();
+        if (fileExplorer.currentFile) {
+          await fileExplorer.updateFileContent(fileExplorer.currentFile, content);
+        }
+      }, 500);
     });
 
   } catch (error) {

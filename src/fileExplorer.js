@@ -4,6 +4,7 @@ export class FileExplorer {
       this.webcontainer = webcontainerInstance;
       this.editor = editor;
       this.currentPath = '';
+      this.currentFile = null;
       this.initialize();
     }
   
@@ -127,9 +128,25 @@ export class FileExplorer {
   
     async openFile(path) {
       const contents = await this.webcontainer.fs.readFile(path, 'utf-8');
+      this.currentFile = path;
       this.editor.setValue(contents);
       const language = this.getFileLanguage(path);
       monaco.editor.setModelLanguage(this.editor.getModel(), language);
+      this.updateFileSelection(path);
+    }
+
+    updateFileSelection(path) {
+      const items = this.container.querySelectorAll('.file-tree-item');
+      items.forEach(item => item.classList.remove('selected'));
+
+      const selectedItem = this.container.querySelector(`[data-path="${path}"]`);
+      if (selectedItem) {
+        selectedItem.classList.add('selected');
+      }
+    }
+
+    async updateFileContent(path, content) {
+      await this.webcontainer.fs.writeFile(path, content);
     }
   
     getFileLanguage(path) {

@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import monacoEditorPlugin from 'vite-plugin-monaco-editor';
 
 export default defineConfig({
   server: {
@@ -7,6 +8,11 @@ export default defineConfig({
       'Cross-Origin-Opener-Policy': 'same-origin',
     },
   },
+  plugins: [
+    monacoEditorPlugin.default({
+      languageWorkers: ['typescript', 'editorWorkerService']
+    })
+  ],
   optimizeDeps: {
     exclude: ['@webcontainer/api'],
   },
